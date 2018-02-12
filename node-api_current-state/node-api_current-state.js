@@ -33,7 +33,10 @@ const _int = {
             return null;
         }
 
-        node.send({ topic: entity_id, payload: currentState.state, data: currentState });
+        msg.topic = entity_id;
+        msg.payload = currentState.state;
+        msg.data = currentState;
+        node.send(msg);
     }
 };
 
