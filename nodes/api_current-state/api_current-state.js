@@ -51,8 +51,8 @@ module.exports = function(RED) {
             }
 
             // default switches to true if undefined (backward compatibility
-            const override_topic = this.nodeConfig.override_topic || true;
-            const override_payload = this.nodeConfig.override_payload || true;
+            const override_topic = this.nodeConfig.override_topic !== false;
+            const override_payload = this.nodeConfig.override_payload !== false;
 
             if (override_topic)   message.topic = entity_id;
             if (override_payload) message.payload = currentState.state;
