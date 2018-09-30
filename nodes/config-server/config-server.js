@@ -55,11 +55,10 @@ module.exports = function(RED) {
 
             if (this.nodeConfig.url && !this.homeAssistant) {
                 let config = { baseUrl: this.nodeConfig.url }
-                if (this.nodeConfig.pass !== '') {
-                    config['apiPass'] = this.nodeConfig.pass;
-                }
                 if (this.nodeConfig.llat !== '') {
                     config['accessToken'] = this.nodeConfig.llat;
+                } else if (this.nodeConfig.pass !== '') {
+                    config['apiPass'] = this.nodeConfig.pass;
                 }
                 this.homeAssistant = new HomeAssistant(config, { startListening: false });
                 this.api    = this.homeAssistant.api;
@@ -145,7 +144,7 @@ module.exports = function(RED) {
 
         onHaEventsError(err) {
             this.setOnContext('isConnected', false);
-            this.debug(err);
+            this.debug(err.toString());
         }
     }
 
