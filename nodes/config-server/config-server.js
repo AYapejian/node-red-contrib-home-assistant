@@ -31,7 +31,8 @@ module.exports = function(RED) {
         config: {
             name: {},
             url:  {},
-            pass: {}
+            pass: {},
+            llat: {}
         }
     };
 
@@ -53,7 +54,13 @@ module.exports = function(RED) {
             this.setOnContext('isConnected', false);
 
             if (this.nodeConfig.url && !this.homeAssistant) {
-                this.homeAssistant = new HomeAssistant({ baseUrl: this.nodeConfig.url, apiPass: this.nodeConfig.pass }, { startListening: false });
+                let config = { baseUrl: this.nodeConfig.url }
+                if (this.nodeConfig.llat !== '') {
+                    config['accessToken'] = this.nodeConfig.llat;
+                } else if (this.nodeConfig.pass !== '') {
+                    config['apiPass'] = this.nodeConfig.pass;
+                }
+                this.homeAssistant = new HomeAssistant(config, { startListening: false });
                 this.api    = this.homeAssistant.api;
                 this.events = this.homeAssistant.events;
 

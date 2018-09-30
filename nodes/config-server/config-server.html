@@ -4,7 +4,8 @@
         defaults: {
             name: { value: 'Home Assistant', required: false },
             url:  { value: '', required: true  },
-            pass: { value: '', required: false }
+            pass: { value: '', required: false },
+            llat: { value: '', required: false }
         },
         icon: "home.png",
         label: function() { return this.name || this.url }
@@ -27,6 +28,11 @@
         <label for="node-config-input-pass"><i class="fa fa-user-secret"></i> API Pass</label>
         <input type="text" id="node-config-input-pass" placeholder="your-super-secret-password" />
     </div>
+
+    <div class="form-row">
+        <label for="node-config-input-llat"><i class="fa fa-user-secret"></i> Long-Lived Access Token</label>
+        <input type="text" id="node-config-input-llat" placeholder="Long-Lived Access Token" />
+    </div>
 </script>
 
 <script type="text/x-red" data-help-name="server">
@@ -47,6 +53,10 @@
                 API Pass       <span class="property-type">string</span>
             </dt>
             <dd>Password used to contact the API, if one is needed</dd>
+            <dt class="optional">
+                Long-Lived Access Token <span class="property-type">string</span>
+            </dt>
+            <dd>Long-Lived Access Token used to contact the API, if one is needed</dd>
     </dl>
 
     <h3>Details</h3>
