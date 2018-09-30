@@ -144,7 +144,7 @@ module.exports = function(RED) {
 
         onHaEventsError(err) {
             this.setOnContext('isConnected', false);
-            this.debug(err.toString());
+            this.debug(err);
         }
     }
 
